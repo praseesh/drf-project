@@ -1,31 +1,43 @@
 from rest_framework import serializers
 from rest_framework.response import Response
-from watchlist_app.models import Movie
+from watchlist_app.models import WatchList,StreamPlatform
 
-class MovieSerializer(serializers.ModelSerializer):
-    name_length = serializers.SerializerMethodField()
+class WatchListSerializer(serializers.ModelSerializer):
+    # name_length = serializers.SerializerMethodField()
     class Meta:
-        model = Movie
+        model = WatchList
         fields = '__all__'
         # exclude = ['name']
+
+class StreamPlatformSerializer(serializers.ModelSerializer):
+    watchlist = WatchListSerializer(many=True,read_only=True)
+    # watchlist = serializers.StringRelatedField(many=True)
+    # watchlist = serializers.HyperlinkedRelatedField(
+    #     many=True,
+    #     read_only = True,
+    #     view_name='movie_detail'
+    # )
+    class Meta:
+        model = StreamPlatform
+        fields = '__all__'
         
-    def get_name(self,object):
-        length = len(object.name)
-        return length
+    # def get_name(self,object):
+    #     length = len(object.name)
+    #     return length
         
-    def validate(self,data):
-        if data['name'] == data['description']:
-            raise serializers.ValidationError('Title and Description must be Different')
-        else:
-            return data
+    # def validate(self,data):
+    #     if data['name'] == data['description']:
+    #         raise serializers.ValidationError('Title and Description must be Different')
+    #     else:
+    #         return data
         
-    def validate_name(self,value):
-        if len(value) < 2:
-            raise serializers.ValidationError("Movie Name is too Short")
-        elif len(value) >= 50:
-            raise serializers.ValidationError("Movie Name is too Big")
-        else:
-            return value
+    # def validate_name(self,value):
+    #     if len(value) < 2:
+    #         raise serializers.ValidationError("Movie Name is too Short")
+    #     elif len(value) >= 50:
+    #         raise serializers.ValidationError("Movie Name is too Big")
+    #     else:
+    #         return value
 
 
 
