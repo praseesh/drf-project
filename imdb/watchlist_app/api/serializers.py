@@ -9,7 +9,7 @@ class WatchListSerializer(serializers.ModelSerializer):
         fields = '__all__'
         # exclude = ['name']
 
-class StreamPlatformSerializer(serializers.ModelSerializer):
+class StreamPlatformSerializer(serializers.HyperlinkedModelSerializer):
     watchlist = WatchListSerializer(many=True,read_only=True)
     # watchlist = serializers.StringRelatedField(many=True)
     # watchlist = serializers.HyperlinkedRelatedField(
