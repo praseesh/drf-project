@@ -6,7 +6,8 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from rest_framework import generics,mixins,viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from watchlist_app.api.permissions import AdminOrReadOnly,ReviewUserOrReadOnly
 
 class ReviewCreate(generics.CreateAPIView):
@@ -33,9 +34,10 @@ class ReviewCreate(generics.CreateAPIView):
 
 
 class ReviewList(generics.ListAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     serializer_class = ReviewSerializer
-    
+
     def get_queryset(self):
         pk = self.kwargs['pk']
         return Review.objects.filter(watchlist=pk)

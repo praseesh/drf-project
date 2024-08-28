@@ -1,5 +1,6 @@
- from django.shortcuts import render
- from .models import Movie
+from django.http import JsonResponse
+from django.shortcuts import render
+from .models import Movie
 # from django.http import JsonResponse
 
 
@@ -10,12 +11,12 @@
 #     }
 #     return JsonResponse(data)
 
- def movie_detail(request, pk):
-     movie = Movie.objects.get(pk=pk)
-     print(movie)
-     data = {
-         'name' : movie.name,
-         'description': movie.description,
-         'active': movie.active
+def movie_detail(request, pk):
+    movie = Movie.objects.get(pk=pk)
+    print(movie)
+    data = {
+        'name' : movie.name,
+        'description': movie.description,
+        'active': movie.active
      }
-     return JsonResponse(data)
+    return JsonResponse(data)
