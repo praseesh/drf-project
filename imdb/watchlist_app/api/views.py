@@ -193,15 +193,6 @@ class WatchDetailAV(APIView):
 
 
 
-
-
-
-
-
-
-
-
-
 # @api_view(['GET','POST'])
 # def movie_list(request):
 #     if request.method == 'GET':
