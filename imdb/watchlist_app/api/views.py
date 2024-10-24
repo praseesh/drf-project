@@ -9,6 +9,8 @@ from rest_framework import generics,mixins,viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from watchlist_app.api.permissions import AdminOrReadOnly,ReviewUserOrReadOnly
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.decorators import api_view
 
 class ReviewCreate(generics.CreateAPIView):
         
@@ -185,6 +187,8 @@ class WatchDetailAV(APIView):
         movie.delete()
         content = {'please move along': 'nothing to see here'}
         return Response(content, status=status.HTTP_404_NOT_FOUND)
+
+
 
 
 
