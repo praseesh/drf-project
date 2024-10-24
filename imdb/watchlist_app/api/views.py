@@ -137,6 +137,7 @@ class StreamDetailAV(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST )
+    
     def delete(self, request,pk):
         try:
             platform = StreamPlatform.objects.get(pk=pk)
@@ -217,7 +218,6 @@ class WatchDetailAV(APIView):
 #             return Response({'Error':'Movie Not Exist'}, status=status.HTTP_404_NOT_FOUND)
 #         serializer = MovieSerializer(movie)
 #         return Response(serializer.data)
-    
 #     if request.method == 'PUT':
 #         movie = Movie.objects.get(pk=pk)
 #         serializer = MovieSerializer(movie,data=request.data)
@@ -226,7 +226,6 @@ class WatchDetailAV(APIView):
 #             return Response(serializer.data)
 #         else:
 #             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST )
-        
 #     if request.method == 'DELETE':
 #         movie =Movie.objects.get(pk=pk)
 #         movie.delete()
