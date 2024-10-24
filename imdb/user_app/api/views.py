@@ -5,7 +5,6 @@ from user_app.api.serializers import RegistrationSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 
-# Create your views here.
 @api_view(['POST',])
 @permission_classes([AllowAny])
 def registration_view(request):
